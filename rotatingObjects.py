@@ -2,12 +2,12 @@
 import sys
 import os
 import math
-import numpy
+import numpy as np
 
 #We define a cube by three vectors (-> 3x3 matrix) and then use rotation matrices on this matrix.
 #Then we project the  3x3 matrix into 2D and print it
 
-rotationsteps=1000
+rotationsteps=1
 phiangle=5*(2*3.14)/360
 cubelength=10 #10 characters in the console
 SimpleCubeMatrix = np.array([[1,0,0],[0,1,0],[0,0,1]])
@@ -36,18 +36,16 @@ def getprintstring(dimensionx,dimensiony,vectorlist, pointchar, emptychar=" "):
     for v in vectorlist:
         stringmatrix[v[0],v[1]] = pointchar
     stringbuilder=""
-    for(y in range(0,dimensionx)):
-        for(x in range(0,dimensiony)):
+    for y in range(0, dimensionx):
+        for x in range(0,dimensiony):
             stringbuilder += str(stringmatrix[x,y]*100)
         stringbuilder += "\n"
     return stringbuilder
-                                 
-clear = lambda: os.system("cls")
+                                
 
-for(x in range(0,rotationsteps):
+for x in range(0,rotationsteps):
     vectorlist = [[]]
-    for(v in range(0,3)):
-          SimpleCubeMatrix[v,:] = np.matmul(rotationmatrix(phiangle,rotationaxis),np.array(SimpleCubeMatrix[v,:]))
-          vectorlist.append(SimpleCubeMatrix[v,:])
-    printf(getprintstring(100,100,vectorlist, "x", " ")
-    clear()
+    for v in range(0,3):
+        SimpleCubeMatrix[v,:] = np.matmul(rotationmatrix(phiangle,rotationaxis),np.array(SimpleCubeMatrix[v,:]))
+        vectorlist.append(SimpleCubeMatrix[v,:])
+    printf(getprintstring(100,100,vectorlist, "x", " "))
